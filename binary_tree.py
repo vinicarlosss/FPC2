@@ -73,14 +73,24 @@ class BinaryTree:
             return self.search(node.getLeft(), element)
         return self.search(node.getRight(), element)
     
-    def minimum(self):
-        node = self.getRoot()
+    def minimum(self, node):
         while node.getLeft() is not None:
             node = node.getLeft()
         return node
     
-    def maximum(self):
-        node = self.getRoot()
+    def maximum(self, node):
         while node.getRight() is not None:
             node = node.getRight()
         return node
+    
+    def successor(self, element):
+        node = self.search(self.getRoot(), element)
+        if node == None:
+            return node
+        if node.getRight() is not None:
+            return self.minimum(node.getRight())
+        y = node.getFather()
+        while y is not None and node == y.getRight():
+            node = y
+            y = y.father
+        return y
