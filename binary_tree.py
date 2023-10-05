@@ -78,3 +78,9 @@ class BinaryTree:
         while node.getLeft() is not None:
             node = node.getLeft()
         return node
+    
+    def maximum(self):
+        node = self.getRoot()
+        while node.getRight() is not None:
+            node = node.getRight()
+        return node
