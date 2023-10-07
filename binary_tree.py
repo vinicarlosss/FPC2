@@ -89,8 +89,25 @@ class BinaryTree:
             return node
         if node.getRight() is not None:
             return self.minimum(node.getRight())
-        y = node.getFather()
+        y = node.getData()
         while y is not None and node == y.getRight():
             node = y
             y = y.father
         return y
+    
+    def insert(self, node):
+        y = None
+        x = self.getRoot()
+        while x is not None:
+            y = x
+            if node.getData() < x.getData():
+                x = x.getLeft()
+            else:
+                x = x.getRight()
+        node.setFather(y)
+        if y == None:
+            self.setRoot(node)
+        elif node.getData() < y.getData():
+            y.setLeft(node)
+        else:
+            y.setRight(node)
