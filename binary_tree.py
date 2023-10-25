@@ -89,10 +89,10 @@ class BinaryTree:
             return node
         if node.getRight() is not None:
             return self.minimum(node.getRight())
-        y = node.getData()
+        y = node.getFather()
         while y is not None and node == y.getRight():
             node = y
-            y = y.father
+            y = y.getFather()
         return y
     
     def insert(self, node):
