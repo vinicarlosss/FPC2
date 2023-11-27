@@ -10,7 +10,8 @@ class RedBlackTree():
 
     def __init__(self):
         self.Nil = Node(None)
-        self.root = None
+        self.Nil.color = "BLACK"
+        self.root = self.Nil
     
 
     def leftRotate(self, node):
@@ -77,6 +78,9 @@ class RedBlackTree():
                     
 
     def insert(self, node):
+        node.father = self.Nil
+        node.left = self.Nil
+        node.right = self.Nil
         y = self.Nil
         x = self.root
         while x is not self.Nil:
@@ -95,4 +99,12 @@ class RedBlackTree():
             node.left = self.Nil
             node.right = self.Nil
             node.color = "RED"
-            self.insertFixup(self, node)
+            self.insertFixup(node)
+
+
+tree = RedBlackTree()
+tree.insert(Node(10))
+tree.insert(Node(9))
+tree.insert(Node(11))
+tree.insert(Node(12))
+print(tree.root.right.right.data)

@@ -95,6 +95,14 @@ class BinaryTree:
             y = y.getFather()
         return y
     
+
+    def InOrderTreeWalk(self,x):
+        if x is not None:
+            self.InOrderTreeWalk(x.getLeft())
+            print(x.getData())
+            self.InOrderTreeWalk(x.getRight())
+
+    
     def insert(self, node):
         y = None
         x = self.getRoot()
