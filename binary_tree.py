@@ -119,3 +119,30 @@ class BinaryTree:
             y.setLeft(node)
         else:
             y.setRight(node)
+
+
+    def Transplant(self, u, v):
+        if u.getFather() is None:
+            self.setRoot(v)
+        elif u == u.getFather().getLeft():
+            u.getFather().setLeft(v)
+        else:
+            u.getFather().setRight(v)
+        if v is not None:
+            v.setFather(u.getFather())
+    
+
+    def TreeDelete(self, z):
+        if z.getLeft() is None:
+            self.Transplant(z, z.getRight())
+        elif z.getRight() is None:
+            self.Transplant(z,z.getLeft())
+        else:
+            y = self.minimum(z.getRight())
+            if y.getFather() != z:
+                self.Transplant(y,y.getRight())
+                y.setRight(z.getRight())
+                y.getRight().setFather(y)
+            self.Transplant(z,y)
+            y.setLeft(z.getLeft())
+            y.getLeft().setFather(y)
