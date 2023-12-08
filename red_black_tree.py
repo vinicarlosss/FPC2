@@ -68,19 +68,17 @@ class RedBlackTree():
                     y.color = "BLACK"
                     node.father.father.color = "RED"
                     node = node.father.father
-                elif node == node.father.right:
+                elif node == node.father.left:
                     node = node.father
-                    self.leftRotate(node)
+                    self.rightRotate(node)
                     node.father.color = "BLACK"
                     node.father.father.color = "RED"
-                    self.rightRotate(node.father.father)
+                    self.leftRotate(node.father.father)
         self.root.color = "BLACK"
-                    
+
+
 
     def insert(self, node):
-        node.father = self.Nil
-        node.left = self.Nil
-        node.right = self.Nil
         y = self.Nil
         x = self.root
         while x is not self.Nil:
@@ -96,15 +94,21 @@ class RedBlackTree():
             y.left = node
         else:
             y.right = node
-            node.left = self.Nil
-            node.right = self.Nil
-            node.color = "RED"
-            self.insertFixup(node)
+        node.left = self.Nil
+        node.right = self.Nil
+        node.color = "RED"
+        self.insertFixup(node)  
+    
 
+    def inOrderTreeWalk(self, x):
+        if x.data is not None:
+            self.inOrderTreeWalk(x.left)
+            print(x.data)
+            self.inOrderTreeWalk(x.right)
 
 tree = RedBlackTree()
 tree.insert(Node(10))
 tree.insert(Node(9))
 tree.insert(Node(11))
 tree.insert(Node(12))
-print(tree.root.right.right.data)
+tree.inOrderTreeWalk(tree.root)
